@@ -37,8 +37,7 @@
   (add-object 'grass)
   (add-object 'fire)
   (add-object 'clay)
-  (add-object 'air)
-  (defplayer))
+  (add-object 'air))
 
 (defun initialize-sprite-table ()
   "Initializes the starting sprites."
