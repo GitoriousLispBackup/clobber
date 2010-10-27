@@ -12,9 +12,7 @@
   (setf (sdl:frame-rate) 60)
   (sdl:enable-unicode)
   (sdl-ttf:init-ttf)
-  (sdl:enable-key-repeat 500 150)
-  (initialize-object-table)
-  (initialize-sprite-table))
+  (sdl:enable-key-repeat 500 150))
 
 (defun draw ()
   "This code is looped repeatedly while main is run. The order of drawing code is important."
