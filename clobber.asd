@@ -14,7 +14,6 @@
                (:file "classes")
                (:file "init")
                (:file "objects")
-               (:file "sprites")
                (:file "render")
                (:file "print")
                (:file "model")
