@@ -3,7 +3,7 @@
 ;;; Sprite Functions
 ;(gethash name (sprites *world*))
 (defun add-sprite (name)
-  "This function adds a sprite/path pair to the *sprite-lookup-table* hash-table."
+  "Adds a sprite"
   (setf (sprite name)
         (sdl:load-image
          (asdf:system-relative-pathname
@@ -14,7 +14,7 @@
                        ".png")))))
 
 (defun initialize-sprite-table ()
-  "This function initializes the *sprite-lookup-table* with it's starting values."
+  "Initializes the starting sprites."
   (add-sprite 'empty)
   (add-sprite 'player)
   (add-sprite 'earth)
