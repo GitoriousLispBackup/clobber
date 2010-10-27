@@ -12,6 +12,7 @@
                :iterate)
   :components ((:file "package")
                (:file "classes")
+               (:file "generics")
                (:file "init")
                (:file "objects")
                (:file "render")

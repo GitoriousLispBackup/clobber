@@ -2,6 +2,7 @@
 
 ;;; Sprite Functions
 ;(gethash name (sprites *world*))
+
 (defun add-sprite (name)
   "Adds a sprite"
   (setf (sprite name)
@@ -13,17 +14,13 @@
                        (string-downcase (symbol-name name))
                        ".png")))))
 
-(defun initialize-sprite-table ()
-  "Initializes the starting sprites."
-  (add-sprite 'empty)
-  (add-sprite 'player)
-  (add-sprite 'earth)
-  (add-sprite 'stone)
-  (add-sprite 'grass))
+;;; Unit Definition
+(defobject unit (layer x y hp inventory))
+(defcontainer rucksack :slots 16)
+(defobject player (name direction str def) :inherit (unit))
 
-(defun lookup-sprite (object)
-  (sprite object))
-
+(defparameter *player* (make-instance 'player))
+(defparameter *world* (make-instance 'world))
 
 (let ((counter 0))
   (defun add-object (name)  
@@ -42,6 +39,17 @@
   (add-object 'clay)
   (add-object 'air)
   (defplayer))
+
+(defun initialize-sprite-table ()
+  "Initializes the starting sprites."
+  (add-sprite 'empty)
+  (add-sprite 'player)
+  (add-sprite 'earth)
+  (add-sprite 'stone)
+  (add-sprite 'grass))
+
+(defun lookup-sprite (object)
+  (sprite object))
 
 (defun lookup-object (id)
   (gethash id (objects *world*)))
