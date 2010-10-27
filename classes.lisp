@@ -1,36 +1,33 @@
 (in-package :clobber)
 
-(defmacro defobject (name
-                     (&body slots)
-                     &key
-                     (inherit nil))
-  (let ((number-of-slots (length slots)))
-    `(defclass ,name ,(if inherit
-                          inherit
-                          '())
-       ,(loop for i from 0 to (1- number-of-slots)
-           collect (list (nth i slots) :accessor (nth i slots))))))
+(defmacro defsprite (name)
+  `(sdl:load-image ,(asdf:system-relative-pathname :clobber (concatenate 'string "images/" (string-downcase (string name)) ".png"))))
+
+(defmacro defobject (name (&body slots) &key (inherit nil))
+  (let ((slot-list `((sprite :initform nil))))
+    (dolist (i slots) (push (list i :accessor i) slot-list))
+    `(defclass ,name ,(if inherit inherit '())
+       ,@(list slot-list))))
 
 ;;; Unit Definition
 (defobject unit (layer x y hp inventory))
 
-(defmacro defcontainer (name
-                        &key
-                        (slots 6))
-  `(defclass ,name (unit) 
-     ,(loop for i from 0 to slots
-         collect (list (intern (concatenate 'string "slot-" (write-to-string i)))))))
+(defmacro defcontainer (name &key (slots 6))
+  (let ((acc))
+    (dotimes (i slots)
+      (push
+       (list (intern (concatenate 'string "slot-" (write-to-string (1+ i)))))
+       acc))
+    `(defclass ,name (unit)        
+       ,(reverse acc))))
 
-(defmacro defplayer (&key
-                     (layer 0)
-                     (name "John Galt")
-                     (hp 100)
-                     (str 10))
+(defmacro defplayer (&key (layer 0) (name "John Galt") (hp 100) (str 10))
   `(defclass player (unit)
      ((layer :initform ,layer :accessor layer)      
       (name :initform ,name :accessor name)
       (x-pos :initform 5 :accessor x-pos)
       (y-pos :initform 5 :accessor y-pos)
+      (sprite :initform (defsprite player))
       (hp :initform ,hp :accessor hp)
       (direction :initform 0 :accessor direction)
       (str :initform ,str :accessor str)
