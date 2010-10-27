@@ -20,23 +20,21 @@
 
 ;;; Unit Definition
 (defobject unit (layer x y hp inventory))
-(defobject player ())
-
-(defmacro defplayer (&key (layer 0) (name "John Galt") (hp 100) (str 10))
-  `(defclass player (unit)
-     ((layer :initform ,layer :accessor layer)      
-      (name :initform ,name :accessor name)
-      (x-pos :initform 5 :accessor x-pos)
-      (y-pos :initform 5 :accessor y-pos)
-      (sprite :initform (defsprite player))
-      (hp :initform ,hp :accessor hp)
-      (direction :initform 0 :accessor direction)
-      (str :initform ,str :accessor str)
-      (bag :initform (make-instance 'rucksack) :accessor bag))))
-
 (defcontainer rucksack :slots 16)
+(defobject player (name direction str) :inherit (unit))
 
-(defplayer)
+;; (defmacro defplayer (&key (layer 0) (name "John Galt") (hp 100) (str 10))
+;;   `(defclass player (unit)
+;;      ((layer :initform ,layer :accessor layer)      
+;;       (name :initform ,name :accessor name)
+;;       (x-pos :initform 5 :accessor x-pos)
+;;       (y-pos :initform 5 :accessor y-pos)
+;;       (sprite :initform (defsprite player))
+;;       (hp :initform ,hp :accessor hp)
+;;       (direction :initform 0 :accessor direction)
+;;       (str :initform ,str :accessor str)
+;;       (bag :initform (make-instance 'rucksack) :accessor bag))))
+;; (defplayer)
 
 (defparameter *player* (make-instance 'player))
 
