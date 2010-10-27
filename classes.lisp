@@ -21,7 +21,7 @@
 ;;; Unit Definition
 (defobject unit (layer x y hp inventory))
 (defcontainer rucksack :slots 16)
-(defobject player (name direction str) :inherit (unit))
+(defobject player (name direction str def) :inherit (unit))
 
 ;; (defmacro defplayer (&key (layer 0) (name "John Galt") (hp 100) (str 10))
 ;;   `(defclass player (unit)
@@ -34,11 +34,7 @@
 ;;       (direction :initform 0 :accessor direction)
 ;;       (str :initform ,str :accessor str)
 ;;       (bag :initform (make-instance 'rucksack) :accessor bag))))
-<<<<<<< HEAD
-(defplayer)
-=======
-;; (defplayer)
->>>>>>> master
+
 
 (defparameter *player* (make-instance 'player))
 
