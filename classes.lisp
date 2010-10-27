@@ -1,10 +1,14 @@
 (in-package :clobber)
 
+(defparameter *current-layer* 0)
+
 (defmacro defsprite (name)
   `(sdl:load-image ,(asdf:system-relative-pathname :clobber (concatenate 'string "images/" (string-downcase (string name)) ".png"))))
 
 (defmacro defobject (name (&body slots) &key (inherit nil))
-  (let ((slot-list `((sprite :accessor sprite) (top-sprite :accessor top-sprite))))
+  (let ((slot-list `((layer :initform *current-layer* :accessor layer)
+                     (sprite :accessor sprite)
+                     (top-sprite :accessor top-sprite))))
     (dolist (i slots) (push (list i :accessor i) slot-list))
     `(defclass ,name ,(if inherit inherit '())
        ,@(list slot-list))))
