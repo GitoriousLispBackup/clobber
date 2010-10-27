@@ -25,7 +25,7 @@
 (defobject grass () :inherit (earth))
 (defobject fire () :inherit (earth))
 (defobject clay () :inherit (earth))
-(defobject air () :inherit (earth)))
+(defobject air () :inherit (earth))
 
 
 (defparameter *player* (make-instance 'player))
