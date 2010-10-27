@@ -34,7 +34,11 @@
 ;;       (direction :initform 0 :accessor direction)
 ;;       (str :initform ,str :accessor str)
 ;;       (bag :initform (make-instance 'rucksack) :accessor bag))))
+<<<<<<< HEAD
 (defplayer)
+=======
+;; (defplayer)
+>>>>>>> master
 
 (defparameter *player* (make-instance 'player))
 
