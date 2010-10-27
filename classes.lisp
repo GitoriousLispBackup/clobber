@@ -4,13 +4,10 @@
   `(sdl:load-image ,(asdf:system-relative-pathname :clobber (concatenate 'string "images/" (string-downcase (string name)) ".png"))))
 
 (defmacro defobject (name (&body slots) &key (inherit nil))
-  (let ((slot-list `((sprite :initform nil))))
+  (let ((slot-list `((sprite :accessor sprite) (top-sprite :accessor top-sprite))))
     (dolist (i slots) (push (list i :accessor i) slot-list))
     `(defclass ,name ,(if inherit inherit '())
        ,@(list slot-list))))
-
-;;; Unit Definition
-(defobject unit (layer x y hp inventory))
 
 (defmacro defcontainer (name &key (slots 6))
   (let ((acc))
@@ -20,6 +17,10 @@
        acc))
     `(defclass ,name (unit)        
        ,(reverse acc))))
+
+;;; Unit Definition
+(defobject unit (layer x y hp inventory))
+(defobject player ())
 
 (defmacro defplayer (&key (layer 0) (name "John Galt") (hp 100) (str 10))
   `(defclass player (unit)
