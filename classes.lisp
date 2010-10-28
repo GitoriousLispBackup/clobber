@@ -1,25 +1,5 @@
 (in-package :clobber)
 
-(defparameter *object-list* (list 'player
-                                  'earth
-                                  'stone
-                                  'water
-                                  'dirt
-                                  'grass
-                                  'fire
-                                  'clay
-                                  'air))
-
-(defparameter *world*         (make-instance 'world))
-
-(defparameter *player*        (make-instance 'player :x 5
-                                              :y 5
-                                              :z 0
-                                              :n 1
-                                              :top-sprite nil
-                                              :sprite nil
-                                              :layer 0))
-
 (defclass world ()
   ((layers :type vector :initform (list (make-array '(10 10)) (make-array '(10 10))) :accessor layers)
    (objects :type hash-table :initform (make-hash-table) :accessor objects)
@@ -48,6 +28,26 @@
 (defclass fire (object) ())
 (defclass clay (object) ())
 (defclass air (object) ())
+
+(defparameter *object-list* (list 'player
+                                  'earth
+                                  'stone
+                                  'water
+                                  'dirt
+                                  'grass
+                                  'fire
+                                  'clay
+                                  'air))
+
+(defparameter *world*         (make-instance 'world))
+
+(defparameter *player*        (make-instance 'player :x 5
+                                              :y 5
+                                              :z 0
+                                              :n 1
+                                              :top-sprite nil
+                                              :sprite nil
+                                              :layer 0))
 
 (defgeneric attach (thing obj)
   (:documentation "Attaches a thing to the appropriate slot of obj")
