@@ -11,12 +11,7 @@
                :bordeaux-threads
                :iterate)
   :components ((:file "package")
-               (:file "init")
-               (:file "model")
                (:file "classes")
-               (:file "objects")
                (:file "print")
-               (:file "generics")
-               (:file "render")
                (:file "events")
                (:file "game")))
